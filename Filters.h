@@ -18,7 +18,7 @@ void applyInvert_3(Image& image);
 
 // Filter 4: Adding a Frame to the Picture
 void applyFrame_4(Image& image, int frameType,
-     unsigned char r, unsigned char g, unsigned char b) ;
+     unsigned char r, unsigned char g, unsigned char b) ; // frame style : 1. simple , 2.fancy
 
 // Filter 5: Flip Image
 void applyFlip_5(Image& image, bool horizontal = true);
