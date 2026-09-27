@@ -4,7 +4,25 @@
 using namespace std;
 
 void applyBlackAndWhite_2(Image& image){
-    // I`ll do it latter
+    for (int i = 0; i < image.width; ++i) {
+        for (int j = 0; j < image.height; ++j) {
+            int avr=0;
+            for (int k = 0; k < 3; ++k) {
+                 avr+=image(i, j, k);
+            }
+            if(avr/3 >=128){
+              for (int k = 0; k < 3; ++k) {  
+                image(i, j, k) =255;
+                }
+            }
+            else {
+                for (int k = 0; k < 3; ++k) {  
+                    image(i, j, k) =0;
+                }
+            }
+        }   
+    }
+
 };
 
 
@@ -57,6 +75,6 @@ void applyRotate_6(Image& image, int degree){
         }
         image=anotherImageWithReversedSize2;
         }
-     image.saveImage("rotatedImage.jpg");   
+       
 
 };
