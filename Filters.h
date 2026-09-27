@@ -4,7 +4,7 @@
 #include "Image_Class.h"
 
 // =================================================================
-// Prototypes for Filters (1 to 8)
+//             Prototypes for Filters (1 to 8)
 // =================================================================
 
 // Filter 1: Grayscale Conversion
@@ -18,7 +18,8 @@ void applyInvert_3(Image& image);
 
 // Filter 4: Adding a Frame to the Picture
 void applyFrame_4(Image& image, int frameType,
-     unsigned char r, unsigned char g, unsigned char b) ; // frame style : 1. simple , 2.fancy
+     unsigned char r, unsigned char g, unsigned char b) ; 
+     // frame style : 1. simple , 2.fancy
 
 // Filter 5: Flip Image
 void applyFlip_5(Image& image, bool horizontal = true);
@@ -26,8 +27,13 @@ void applyFlip_5(Image& image, bool horizontal = true);
 // Filter 6: Rotate Image
 void applyRotate_6(Image& image, int degree);
 
-// Filter 7: Darken and Lighten Image
-void applyBrightness_7(Image& image, double factor);
+ /*
+Filter 7: Darken and Lighten Image
+factor > 0 -> lightening 
+factor < 0  -> darkening  
+*/
+void applyBrightness_7(Image& image, double factor); 
+
 
 // Filter 8: Resizing Images
 void applyResize_8(Image& image, int newWidth , int newHeight);

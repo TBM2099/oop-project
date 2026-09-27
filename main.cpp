@@ -6,9 +6,9 @@
 #include <algorithm>
 
 void showAppName () {
-    std::cout << "\n ================================" << '\n';
-    std::cout << "           Baby Photoshop        " << '\n';
-    std::cout << " ================================" << '\n'<<'\n';
+    std::cout << "\n =====================================" << '\n';
+    std::cout << "              Baby Photoshop        " << '\n';
+    std::cout << " =====================================" << '\n'<<'\n';
 }
 
 void showMenu () {
@@ -165,7 +165,7 @@ int main() {
             std::cout << "Select Lightness Mode:\n1. Lighten Image\n2. Darken Image\n";
             std::cin >> mode;
 
-            std::cout << "Enter percentage (1 - 100%):\n";
+            std::cout << "Enter percentage:\n";
             std::cin >> factor;
             
             applyBrightness_7 (currentImage, (mode == 1)? factor: -factor);
