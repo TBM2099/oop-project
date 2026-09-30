@@ -139,7 +139,7 @@ void applyFrame_4(Image& image, int frameType,
                     {
                         if ((x + y) % 8 < 2 || (x - y) % 8 == 0)
                         {
-                            image.setPixel(x, y, 0, 255); // لون أبيض للنجوم
+                            image.setPixel(x, y, 0, 255); // white color for stars
                             image.setPixel(x, y, 1, 255);
                             image.setPixel(x, y, 2, 255);
                         }
@@ -157,7 +157,7 @@ void applyFrame_4(Image& image, int frameType,
                     {
                         image.setPixel(x, y, 0, 255); // Red 
                         image.setPixel(x, y, 1, 255); // Green
-                        image.setPixel(x, y, 2, 255); // Bule 
+                        image.setPixel(x, y, 2, 255); // Blue 
 
                     }
 
@@ -590,7 +590,7 @@ int main() {
         // Pause to let the user read the success message before clearing the screen for the next loop
         if (running) {
             std::cout << "\nPress Enter to continue...";
-            std::cin.ignore();
+            std::cin.ignore(10000,'\n');
             std::cin.get();
         }
     }

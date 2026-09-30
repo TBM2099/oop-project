@@ -4,7 +4,7 @@
 #include "Image_Class.h"
 
 // =================================================================
-// Prototypes for Filters (1 to 8)
+// Prototypes for Filters 
 // =================================================================
 
 // Filter 1: Grayscale Conversion
