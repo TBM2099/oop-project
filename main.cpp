@@ -1,6 +1,6 @@
 /*
  * Course: CS213 - Object-Oriented Programming
- * Project: Baby Photoshop - Phase 1
+ * Project: Baby Photoshop - Phase 1 
  * File: main.cpp
  * 
  * Team Members & Filter Assignments:
@@ -19,7 +19,6 @@
  */
 
 #include "Image_Class.h"
-#include "Filters.h"
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -344,9 +343,9 @@ void applyResize_8(Image& image, int newWidth, int newHeight)
 
 
 void showAppName () {
-    std::cout << "\n ***===================================***" << '\n';
-    std::cout << "             Baby Photoshop        " << '\n';
-    std::cout << " ***===================================***" << '\n'<<'\n';
+    std::cout << "\n =========================================" << '\n';
+    std::cout << "               Baby Photoshop        " << '\n';
+    std::cout << " =========================================" << '\n'<<'\n';
 }
 
 void showMenu () {
@@ -366,26 +365,26 @@ void showMenu () {
 
 bool loadNewImage(Image& image) {
     std::string file_name ; 
-    std::cout <<"Enter image filename/path: ";
+    std::cout <<"Enter image filename/path:\n->";
     std::cin >> file_name;
     try {
         image.loadNewImage(file_name) ;
         std::cout << "\nImage loaded successfully! \n";
         return true ;
     } catch (...) {
-        std::cout <<"\nERROR! please check the file path.\n";
+        std::cout <<"\nplease check the file path!\n";
         return false;
     }
 }
 
 void saveImage (Image& image) {
-    std::cout << " Enter the target path/filename (e.g., output.png, result.jpg, myImage.bmp)\n";
+    std::cout << " Enter the target path/filename (e.g., output.png, result.jpg, myImage.bmp)\n->";
     std::string filename ;
     std::cin >> filename;
     // try to save ; if it failed will appear an error massage for the
     try {
         image.saveImage(filename);
-        std::cout << "Image saved successfully as "<< filename <<"!\n" ;
+        std::cout << "Image saved successfully as \""<< filename <<"\"!\n" ;
     } catch(...) {
         std::cout << "Error: could not save the image!" << '\n';
     }
@@ -415,12 +414,13 @@ void getRGBFromUser(unsigned char& r, unsigned char& g, unsigned char& b) {
 int main() {
     Image currentImage;
     bool running = true;
+    bool isSaved = true;
 
     showAppName();
     
     // load the image before starting the main loop
     while (!loadNewImage(currentImage)){
-        std::cout << "try again.\n";
+        std::cout << "\ntry again\n";
     }
 
     // main loop 
@@ -438,21 +438,24 @@ int main() {
         switch (choice) {
             case '1':
                 applyGrayscale_1(currentImage);
+                isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             
             case '2':
                 applyBlackAndWhite_2(currentImage);
+                isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             
             case '3':
                 applyInvert_3(currentImage);
+                isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             
             case '4': {
-                std::cout << "\nChoose frame style :\n1.simple\n2.fancy\n";
+                std::cout << "\nChoose frame style :\n1.simple\n2.fancy\n->";
                 int frameStyle; 
                 // Validation: ensure input is a valid number and strictly 1 or 2
                 while (!(std::cin >> frameStyle) || (frameStyle != 1 && frameStyle != 2)) {
@@ -465,12 +468,14 @@ int main() {
                 getRGBFromUser(r, g, b);
 
                 applyFrame_4(currentImage, frameStyle, r, g, b);
+                isSaved = false;
                 std::cout << "\nFrame added successfully!\n";
                 break;
             }
             
-            case '5': {
-                std::cout << "\nChoose an option:\n1.horizontal\n2.vertical\n";
+            case '5': 
+            {
+                std::cout << "\nChoose an option:\n1.horizontal\n2.vertical\n->";
                 int subChoice;
                 // Validation: ensure input is a valid number and strictly 1 or 2
                 while (!(std::cin >> subChoice) || (subChoice != 1 && subChoice != 2)) {
@@ -482,14 +487,15 @@ int main() {
                 if (subChoice == 2) {
                     applyFlip_5(currentImage, false);
                 } else {
-                    applyFlip_5(currentImage);
+                    applyFlip_5(currentImage,true);
                 }
+                isSaved = false;
                 std::cout << "\nFlip applied successfully!\n";
                 break;
             }
             
             case '6': {
-                std::cout << "Enter a degree of rotation (e.g. 180, 90):\n";
+                std::cout << "Enter a degree of rotation (e.g. 180, 90):\n->";
                 int degree;
                 // Validation: ensure input is a valid integer
                 while (!(std::cin >> degree)) {
@@ -499,6 +505,7 @@ int main() {
                 }
 
                 applyRotate_6(currentImage, degree % 360);
+                isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             }
@@ -507,7 +514,7 @@ int main() {
                 int mode;
                 double factor;
 
-                std::cout << "Select Lightness Mode:\n1. Lighten Image\n2. Darken Image\n";
+                std::cout << "Select Lightness Mode:\n1. Lighten Image\n2. Darken Image\n->";
                 // Validation: ensure mode is 1 or 2
                 while (!(std::cin >> mode) || (mode != 1 && mode != 2)) {
                     std::cout << "Invalid input. Enter 1 or 2: ";
@@ -524,6 +531,7 @@ int main() {
                 }
                 
                 applyBrightness_7(currentImage, (mode == 1) ? factor : -factor);
+                isSaved = false;
                 std::cout << "\nFilter added successfully!\n";
                 break;
             }
@@ -531,7 +539,7 @@ int main() {
             case '8': {
                 int newWidth, newHeight;
                 
-                std::cout << "Enter new width:\n";
+                std::cout << "Enter new width:\n->";
                 // Validation: ensure width is a positive integer
                 while (!(std::cin >> newWidth) || newWidth <= 0) {
                     std::cout << "Invalid input. Enter a valid positive width: ";
@@ -539,7 +547,7 @@ int main() {
                     std::cin.ignore(10000, '\n');
                 }
 
-                std::cout << "Enter new height:\n";
+                std::cout << "Enter new height:\n->";
                 // Validation: ensure height is a positive integer
                 while (!(std::cin >> newHeight) || newHeight <= 0) {
                     std::cout << "Invalid input. Enter a valid positive height: ";
@@ -548,22 +556,25 @@ int main() {
                 }
 
                 applyResize_8(currentImage, newWidth, newHeight);
+                isSaved = false;
                 std::cout << "\nResizing applied successfully!\n";
                 break;
             }
             
             case 's':
                 saveImage(currentImage);
-                std::cout << "\nImage saved successfully!\n";
+                isSaved = true;
                 break;
             
             case 'l': {
+                if (!isSaved){
                 char confirm;
-                std::cout << "Do you want to save before loading a new image? (Y/N)\n";
-                std::cin >> confirm;
-                if (tolower(confirm) == 'y') {
-                    saveImage(currentImage);
-                }         
+                    std::cout << "Do you want to save before loading a new image? (Y/N)\n->";
+                    std::cin >> confirm;
+                    if (tolower(confirm) == 'y') {
+                        saveImage(currentImage);
+                    } 
+                }        
                 while (!loadNewImage(currentImage)) {
                     std::cout << "try again.\n";
                 }
@@ -571,12 +582,14 @@ int main() {
             }
             
             case 'e': {
-                char confirm; 
-                std::cout << "Do you want to save before exiting? (Y/N)\n";
-                std::cin >> confirm;
+                if (!isSaved){
+                    char confirm; 
+                    std::cout << "Do you want to save before exiting? (Y/N)\n->";
+                    std::cin >> confirm;
 
-                if (tolower(confirm) == 'y') {
-                    saveImage(currentImage);
+                    if (tolower(confirm) == 'y') {
+                        saveImage(currentImage);
+                    }
                 }
                 running = false;
                 break;
@@ -590,7 +603,7 @@ int main() {
         // Pause to let the user read the success message before clearing the screen for the next loop
         if (running) {
             std::cout << "\nPress Enter to continue...";
-            std::cin.ignore(10000,'\n');
+            std::cin.ignore(10000,'\n'); // to ensure ignoring anything user may write and cause problems
             std::cin.get();
         }
     }
