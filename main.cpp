@@ -4,7 +4,7 @@
  * File: main.cpp
  * 
  * Team Members & Filter Assignments:
- * 1. Hatem Abdullah Al-Yafai       - ID: 20253050 - Filters: 1, 5
+ * 1. Hatem Ahmed Al-Hubaishi       - ID: 20253050 - Filters: 1, 5
  * 2. Alaa Al-Deen Nabil Al-Maliki  - ID: 20253072 - Filters: 2, 6
  * 3. Mohammed Mazen Al-Sofi        - ID: 20253073 - Filters: 3, 7
  * 4. Mohammed Abdulmalik Albawah   - ID: 20253081 - Filters: 4, 8
@@ -342,6 +342,43 @@ void applyResize_8(Image& image, int newWidth, int newHeight)
 
 
 
+enum class Option {
+    Filter1 = 1,
+    Filter2 = 2,
+    Filter3 = 3,
+    Filter4 = 4,
+    Filter5 = 5,
+    Filter6 = 6,
+    Filter7 = 7,
+    Filter8 = 8,
+    
+    Save = 100,
+    Load = 101,
+    Exit = 102,
+    Invalid = -1
+};
+
+Option getOptionFromString(const std::string& input) {
+    std::string str = input;
+    for (char &c : str) {
+        c = std::tolower(c);
+    }
+
+    if (str == "s") return Option::Save;
+    if (str == "l") return Option::Load;
+    if (str == "e") return Option::Exit;
+
+    try {
+        int num = std::stoi(str);
+        // Valid filter numbers (currently 1 to 8) 
+        if (num >= 1 && num <= 8) {
+            return static_cast<Option>(num);
+        }
+    } catch (...) {}
+
+    return Option::Invalid;
+}
+
 void showAppName () {
     std::cout << "\n =========================================" << '\n';
     std::cout << "               Baby Photoshop        " << '\n';
@@ -431,30 +468,30 @@ int main() {
         showMenu();
 
         // get user choice 
-        char choice; 
+        std::string choice; 
         std::cin >> choice;
-        choice = tolower(choice); 
+        
 
-        switch (choice) {
-            case '1':
+        switch (getOptionFromString(choice)) {
+            case Option::Filter1 :
                 applyGrayscale_1(currentImage);
                 isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             
-            case '2':
+            case Option::Filter2:
                 applyBlackAndWhite_2(currentImage);
                 isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             
-            case '3':
+            case Option::Filter3:
                 applyInvert_3(currentImage);
                 isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             
-            case '4': {
+            case Option::Filter4: {
                 std::cout << "\nChoose frame style :\n1.simple\n2.fancy\n->";
                 int frameStyle; 
                 // Validation: ensure input is a valid number and strictly 1 or 2
@@ -473,7 +510,7 @@ int main() {
                 break;
             }
             
-            case '5': 
+            case Option::Filter5: 
             {
                 std::cout << "\nChoose an option:\n1.horizontal\n2.vertical\n->";
                 int subChoice;
@@ -494,7 +531,7 @@ int main() {
                 break;
             }
             
-            case '6': {
+            case Option::Filter6: {
                 std::cout << "Enter a degree of rotation (e.g. 180, 90):\n->";
                 int degree;
                 // Validation: ensure input is a valid integer
@@ -510,7 +547,7 @@ int main() {
                 break;
             }
             
-            case '7': {
+            case Option::Filter7: {
                 int mode;
                 double factor;
 
@@ -536,7 +573,7 @@ int main() {
                 break;
             }
             
-            case '8': {
+            case Option::Filter8: {
                 int newWidth, newHeight;
                 
                 std::cout << "Enter new width:\n->";
@@ -561,12 +598,12 @@ int main() {
                 break;
             }
             
-            case 's':
+            case Option::Save:
                 saveImage(currentImage);
                 isSaved = true;
                 break;
             
-            case 'l': {
+            case Option::Load: {
                 if (!isSaved){
                 char confirm;
                     std::cout << "Do you want to save before loading a new image? (Y/N)\n->";
@@ -578,10 +615,11 @@ int main() {
                 while (!loadNewImage(currentImage)) {
                     std::cout << "try again.\n";
                 }
+                isSaved = true;
                 break; 
             }
             
-            case 'e': {
+            case Option::Exit : {
                 if (!isSaved){
                     char confirm; 
                     std::cout << "Do you want to save before exiting? (Y/N)\n->";
