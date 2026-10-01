@@ -3,7 +3,7 @@
  * Course: CS213 - Object-Oriented Programming
  * Project: Baby Photoshop - Phase 1
  * Section: 31
- * File: main.cpp
+ * File: CS213_A1_Part1_31_20253050_20253072_20253073_20253081.cpp
  * 
  * File Description:
  *   Main program file for the "Baby Photoshop" project. It runs the console-based 
