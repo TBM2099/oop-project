@@ -12,9 +12,9 @@
  * 
  * Team Members, IDs & Filter Assignments:
  *   1. Hatem Abdullah Al-Yafai       - ID: 20253050 - Filters: 1, 5
- *   2. Alaa Al-Deen Nabil Al-Maliki - ID: 20253072 - Filters: 2, 6
- *   3. Mohammed Mazen Al-Sofi       - ID: 20253073 - Filters: 3, 7 (Main Menu & Integration)
- *   4. Mohammed Abdulmalik Albawah  - ID: 20253081 - Filters: 4, 8
+ *   2. Alaa Al-Deen Nabil Al-Maliki  - ID: 20253072 - Filters: 2, 6
+ *   3. Mohammed Mazen Al-Sofi        - ID: 20253073 - Filters: 3, 7 
+ *   4. Mohammed Abdulmalik Albawah   - ID: 20253081 - Filters: 4, 8
  *
  * Project Structure & Integration Notes:
  *   - System Architecture & Main Menu Logic: Planned and designed collaboratively by all team members.
