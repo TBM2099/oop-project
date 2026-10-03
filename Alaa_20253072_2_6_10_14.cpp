@@ -117,3 +117,24 @@ void applyDetectImageEdges_10(Image& image){
 
        
 }
+
+void applyOldTvScreen_14(Image& image){
+    
+    for(int i = 0; i < image.width ;++i){
+        for(int j = 0; j < image.height ;++j){
+            if(j %2 == 0){
+                for(int k = 0; k < 3; ++k){
+                    if(image(i,j,k) >= 40)
+                        image(i,j,k) -= 40;
+                    else
+                        image(i,j,k) = 0;
+                
+                    
+                }
+                
+            }   
+            
+        }
+    }
+
+}
