@@ -1,27 +1,27 @@
 /*
  * ==============================================================================
- * Course: CS213 - Object-Oriented Programming
- * Project: Baby Photoshop - Phase 1
- * Section: 31
+ * Course: CS213 - Object-Oriented Programming 
+ * Project: Baby Photoshop - Phase 1 
+ * Section: 31 
  * File: CS213_A1_Part1_31_20253050_20253072_20253073_20253081.cpp
  * 
  * File Description:
  *   Main program file for the "Baby Photoshop" project. It runs the console-based 
  *   interactive menu, handles user inputs, manages image saving states, and 
- *   coordinates all team filters.
+ *   coordinates all team filters. 
  * 
- * Team Members, IDs & Filter Assignments:
- *   1. Hatem Abdullah Al-Yafai       - ID: 20253050 - Filters: 1, 5
- *   2. Alaa Al-Deen Nabil Al-Maliki  - ID: 20253072 - Filters: 2, 6
- *   3. Mohammed Mazen Al-Sofi        - ID: 20253073 - Filters: 3, 7 
- *   4. Mohammed Abdulmalik Albawah   - ID: 20253081 - Filters: 4, 8
+ * Team Members, IDs & Filter Assignments: 
+ *   1. Hatem Ahmed Al-Hubaishi        - ID: 20253050 - Filters: 1, 5
+ *   2. Alaa Al-Deen Nabil Al-Maliki   - ID: 20253072 - Filters: 2, 6
+ *   3. Mohammed Mazen Al-Sofi         - ID: 20253073 - Filters: 3, 7 
+ *   4. Mohammed Abdulmalik Albawah    - ID: 20253081 - Filters: 4, 8
  *
- * Project Structure & Integration Notes:
+ * Project Structure & Integration Notes: 
  *   - System Architecture & Main Menu Logic: Planned and designed collaboratively by all team members.
  *   - Main Program Implementation & Integration: Implemented, finalized, and uploaded by Mohammed Mazen Al-Sofi.
  *
  * Repository & Diagram Links:
- *   - GitHub Repository: https://github.com/TBM2099/oop-project
+ *   - GitHub Repository: https://github.com/TBM2099/oop-project 
  *   - System Architecture Diagram: https://github.com/TBM2099/oop-project/blob/origin/System%20Architecture%20Diagram.png
  * ==============================================================================
  */
