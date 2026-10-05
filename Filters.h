@@ -4,8 +4,8 @@
 #include "Image_Class.h"
 
 // =================================================================
-// Prototypes for Filters 
-// =================================================================
+// Prototypes for Filters  
+// ==================================================================
 
 // Filter 1: Grayscale Conversion
 void applyGrayscale_1(Image& image);
@@ -31,5 +31,37 @@ void applyBrightness_7(Image& image, double factor);
 
 // Filter 8: Resizing Images
 void applyResize_8(Image& image, int newWidth , int newHeight);
+
+// Filter 9: Merging two images
+/*
+Merge Type: 
+1.resize the smaller image or both images to the biggest height and the biggest width 
+2.merge the common area of the smaller width and the smaller height
+*/
+void applyMerge_9 (Image& image_1,Image& image_2, int mergeType);
+
+// Filter 10: Detecting Edges 
+
+void applyDetectImageEdges_10 (Image& image);
+
+//Filter 11: cropping Images
+//(x,y) is the up left corner 
+void applyCrop_11 (Image& image, int x=0, int y=0, int width, int height); 
+
+// Filter 12: blurring Image 
+void applyBlur_12 (Image& image, float factor); // "factor" allows different levels of blurring
+
+// Filter 13: Wano Sunlight 
+
+void applySunlight_13 (Image& image) ;
+
+// Filter 14: TV effect
+void applyOldTvscreen_14 (Image& image);
+
+// Filter 15: Purple look 
+void applyPurple_15(Image& image) ;
+
+// Filter 16: Infrared Photography 
+void applyInfrared_16(Image& Image);
 
 #endif // FILTERS_H
