@@ -542,20 +542,25 @@ int main() {
             }
             
             case Option::Filter6: {
-                std::cout << "Enter a degree of rotation (e.g. 180, 90):\n->";
+                std::cout << "Enter a degree of rotation (you allowd to choice one of these options :90 ,180 or 270): \n->";
                 int degree;
-                // Validation: ensure input is a valid integer
-                while (!(std::cin >> degree)) {
-                    std::cout << "Invalid input. Enter a valid number for degree: ";
-                    std::cin.clear();
-                    std::cin.ignore(10000, '\n');
+                std::cin >> degree;
+                // Validation: ensure input is a valid value
+                
+                while (degree != 90 && degree != 180 && degree != 270) {
+                        std::cout << "Invalid input. Enter a valid number for degree (90, 180, or 270): ";
+                       
+                        std::cin.clear();
+                        std::cin.ignore(10000, '\n');
+                         std::cin >> degree;
                 }
 
-                applyRotate_6(currentImage, degree % 360);
+                applyRotate_6(currentImage, degree );
                 isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             }
+        
             
             case Option::Filter7: {
                 int mode;
@@ -658,5 +663,3 @@ int main() {
 
     return 0;
 }
-
-
