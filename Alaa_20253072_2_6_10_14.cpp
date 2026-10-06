@@ -78,3 +78,63 @@ void applyRotate_6(Image& image, int degree){
        
 
 };
+void applyDetectImageEdges_10(Image& image){
+    
+    for(int i = 0;i <image.width - 1;++i){
+
+        for(int j = 0; j<image.height;++j){
+
+            int avr1 = 0;
+            int avr2 = 0;
+
+            for (int k = 0; k < 3;++k){
+                avr1 +=image(i,j,k);
+            }
+
+            for (int k = 0; k < 3;++k){
+                avr2 +=image(i + 1, j,k);
+
+            }
+
+            avr1 /= 3;
+            avr2 /=3;
+
+            if(avr1 > avr2+7 || avr1 < avr2-7){
+
+                for(int k = 0; k < 3;++k){
+                 image(i,j,k) = 0;
+                }
+
+            }else{
+
+                for(int k =0; k <3; ++k){
+                 image(i,j,k)= 255;
+
+                 }
+            }
+        }
+    }
+
+       
+}
+
+void applyOldTvScreen_14(Image& image){
+    
+    for(int i = 0; i < image.width ;++i){
+        for(int j = 0; j < image.height ;++j){
+            if(j %2 == 0){
+                for(int k = 0; k < 3; ++k){
+                    if(image(i,j,k) >= 40)
+                        image(i,j,k) -= 40;
+                    else
+                        image(i,j,k) = 0;
+                
+                    
+                }
+                
+            }   
+            
+        }
+    }
+
+}
