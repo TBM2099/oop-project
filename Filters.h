@@ -46,7 +46,7 @@ void applyDetectImageEdges_10 (Image& image);
 
 //Filter 11: cropping Images
 //(x,y) is the up left corner 
-void applyCrop_11 (Image& image, int x=0, int y=0, int width, int height); 
+void applyCrop_11 (Image& image, int x, int y, int width, int height); 
 
 // Filter 12: blurring Image 
 void applyBlur_12 (Image& image, float factor); // "factor" allows different levels of blurring
