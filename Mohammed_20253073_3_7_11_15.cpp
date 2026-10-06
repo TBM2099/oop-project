@@ -22,7 +22,7 @@ void applyBrightness_7(Image& image, double factor) {
             int  r,g,b;
             r = image.getPixel(x,y,0)*(1+factor);
             g = image.getPixel(x,y,1)*(1+factor);
-            b = image.getPixel(x,y,2)*(1+factor);
+            b = image.getPixel(x,y,2)*(1+factor); 
             
             image.setPixel(x,y,0, (r >= 0) ? ((r <= 255) ? r: 255): 0);
             image.setPixel(x,y,1, (g >= 0) ? ((g <= 255) ? g: 255): 0);
@@ -30,3 +30,28 @@ void applyBrightness_7(Image& image, double factor) {
         }
     }
 }
+
+
+
+void applyCrop_11 (Image& image, int x, int y, int width, int height){
+    // write your code here
+}
+
+void applyPurple_15(Image& image) {
+  
+    for (int x = 0; x < image.width; x++){
+        for (int y = 0; y < image.height; y++) {
+            int newR = image.getPixel(x,y,0)   ;
+            int newG = static_cast <unsigned char>(image.getPixel(x,y,1)*0.74) ;  
+            int newB = image.getPixel(x,y,2) ;
+            image.setPixel(x,y,0,newR);
+            image.setPixel(x,y,1,newG);
+            image.setPixel(x,y,2,newB);
+        }
+    }
+}
+ int main (){
+    Image image("luffy.jpg");
+    applyPurple_15(image);
+    image.saveImage("op.jpg");
+ }
