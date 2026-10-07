@@ -2,7 +2,7 @@
 #include "Image_class.h"
 
 
-     // Filter 4: Adding a Frame to the Picture
+// Filter 4: Adding a Frame to the Picture
 void applyFrame_4(Image& image, int frameType,
      unsigned char r, unsigned char g, unsigned char b) {
 
@@ -31,7 +31,7 @@ void applyFrame_4(Image& image, int frameType,
         
         }
 
-        //fans frame
+        //fancy frame
         else if (frameType == 2 )
         {
             int OuterThick = 15 ; 
@@ -55,7 +55,7 @@ void applyFrame_4(Image& image, int frameType,
                     {
                         if ((x + y) % 8 < 2 || (x - y) % 8 == 0)
                         {
-                            image.setPixel(x, y, 0, 255); // لون أبيض للنجوم
+                            image.setPixel(x, y, 0, 255); // white color for stars
                             image.setPixel(x, y, 1, 255);
                             image.setPixel(x, y, 2, 255);
                         }
@@ -115,9 +115,6 @@ void applyFrame_4(Image& image, int frameType,
      }
 
 
-    
-
-
 void applyResize_8(Image& image, int newWidth, int newHeight) 
 {
     int TheOriginal_PIC_heihgt = image.height;
@@ -147,9 +144,4 @@ void applyResize_8(Image& image, int newWidth, int newHeight)
         }
     }
             image = The_newIMAGE_for_Wth_Hit;
-
-
-
-
-
 }
