@@ -38,7 +38,7 @@ Merge Type:
 1.resize the smaller image or both images to the biggest height and the biggest width 
 2.merge the common area of the smaller width and the smaller height
 */
-void applyMerge_9 (Image& image_1,Image& image_2, int mergeType);
+void applyMerge_9 (Image& image_1,Image& image_2, bool resize);
 
 // Filter 10: Detecting Edges 
 
@@ -62,6 +62,11 @@ void applyOldTvscreen_14 (Image& image);
 void applyPurple_15(Image& image) ;
 
 // Filter 16: Infrared Photography 
-void applyInfrared_16(Image& Image);
+void applyInfrared_16(Image& image);
 
+// Filter 17: Skewing image
+void applySkewing_17 (Image& image, int degree );
+
+// Filter 18: Oil Painting 
+void applyOilPainting (Image& image) ;
 #endif // FILTERS_H
