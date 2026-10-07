@@ -64,8 +64,3 @@ void applyPurple_15(Image& image) {
 }
  
 
-int main (){
-    Image image("luffy.jpg");
-    applyCrop_11(image, 200 , 200, 200,300);
-    image.saveImage("op.jpg");
- }
