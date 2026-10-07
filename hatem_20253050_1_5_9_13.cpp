@@ -3,6 +3,7 @@
 #include "Image_Class.h"
 #include <string>
 #include <algorithm>
+#include <cmath>
 
 void applyGrayscale_1(Image& imagez)
 {
@@ -126,4 +127,40 @@ void Wano_13(Image& wano)
         }
     }
 }
+
+
+void applySkew_17(Image& image, double angle) {
+    int w = image.width;
+    int h = image.height;
+
+    const double PI = 3.14159265358979;
+    double t = std::tan(angle * PI / 180.0);
+
+    int totalShift = (int)std::round(std::fabs(w * t));
+    int newH = h + totalShift;
+
+    Image result(w, newH);
+    for (int x = 0; x < w; x++)
+        for (int y = 0; y < newH; y++)
+            for (int c = 0; c < 3; c++)
+                result.setPixel(x, y, c, 255);
+
+    for (int x = 0; x < w; x++) {
+        int shift = (int)std::round(x * t);
+        if (t < 0)
+            shift += totalShift;
+
+        for (int y = 0; y < newH; y++) {
+            int srcY = y - shift;
+            if (srcY >= 0 && srcY < h) {
+                for (int c = 0; c < 3; c++)
+                    result.setPixel(x, y, c, image.getPixel(x, srcY, c));
+            }
+        }
+    }
+
+    image = result;
+}
+
+
 
