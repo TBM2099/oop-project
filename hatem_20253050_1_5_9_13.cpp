@@ -4,7 +4,6 @@
 #include <string>
 #include <algorithm>
 
-
 void applyGrayscale_1(Image& imagez)
 {
 
@@ -66,31 +65,26 @@ void applyFlip_5(Image& image, bool horizontal )
     }
 }
 
-void applyMerge_9(Image& image1, Image& image2)
+void applyMerge_9(Image& image1, Image& image2, bool resize)
 {
     
-    int choice = 1;
+    
 
     if (image1.width != image2.width || image1.height != image2.height)
     {
         
-        std::cout <<"\nThe imgages have different dimensions.\n";
-        std::cout <<"1. Resixe the second image to match the first.\n";
-        std::cout <<"2.Merge olnly the common (intersecting) area.\n";
-        std::cout <<"Enter your choice (1 or 2): ";
         
-        std::cin >> choice;
 
-        if (choice == 1)
+        if (resize)
         {
              applyResize_8(image2, image1.width, image1.height);
 
         }
                
     }
-
-    int targetWidth = (choice == 1) ? image1.width : std::min(image1.width ,image2.width);
-    int targeHeight = (choice == 1) ? image1.height : std::min(image1.height ,image2.height);
+    // take commom area 
+    int targetWidth = (resize) ? image1.width : std::min(image1.width ,image2.width);
+    int targeHeight = (resize) ? image1.height : std::min(image1.height ,image2.height);
 
         
     for (int x = 0; x < targetWidth; x++)
@@ -111,6 +105,9 @@ void applyMerge_9(Image& image1, Image& image2)
         }
         
     }
+    if ( !resize ) {
+    applyCrop_11(image1 , 0,0,targetWidth,targeHeight);
+    };
 }
  
 void Wano_13(Image& wano)
@@ -130,53 +127,3 @@ void Wano_13(Image& wano)
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int main()
-{
-    Image coco, dodo;
-
-    std::cout << "enter ur file name or path: ";
-    std::string file_name;
-    std::getline(std::cin, file_name);
-
-    coco.loadNewImage(file_name);
-    system(("start " + file_name).c_str());
-
-    applyGrayscale_1( coco);
-
-    std::cout << "\ngray filter applied is done.";
-    std::cout << "\ntarger file name to save the imgae: ";
-
-    std::string NewFileName;
-    std::getline(std::cin, NewFileName);
-
-    coco.saveImage(NewFileName);
-
-    system(("start " + NewFileName).c_str());
-
-    std::cout << "\n\nImage save successfuly";
-
-    
-}
