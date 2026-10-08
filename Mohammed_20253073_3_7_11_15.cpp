@@ -32,35 +32,26 @@ void applyBrightness_7(Image& image, double factor) {
 }
 
 
+
 void applyCrop_11 (Image& image, int x, int y, int width, int height){
-    
-    if ((x < 0)  || (x+width >= image.width) || (y < 0) || (y + height >= image.height)) 
-        return ;
-
-    Image croppedPart(width, height);
-
-    for (int newX = 0; newX < width; newX++) {
-        for (int newY = 0; newY < height; newY++) {
-            for (int c = 0 ; c < 3 ; c++) {
-                croppedPart(newX, newY,c) = image(x+newX, y+newY, c) ;
-            }
-        }
-    }
-    
-    image = croppedPart;
+    // write your code here
 }
 
 void applyPurple_15(Image& image) {
-    
+  
     for (int x = 0; x < image.width; x++){
         for (int y = 0; y < image.height; y++) {
-            int newG = static_cast <unsigned char>(image.getPixel(x,y,1)*0.73) ;  
-            
-            image.setPixel(x,y,0,image.getPixel(x,y,0));
+            int newR = image.getPixel(x,y,0)   ;
+            int newG = static_cast <unsigned char>(image.getPixel(x,y,1)*0.74) ;  
+            int newB = image.getPixel(x,y,2) ;
+            image.setPixel(x,y,0,newR);
             image.setPixel(x,y,1,newG);
-            image.setPixel(x,y,2,image.getPixel(x,y,2));
+            image.setPixel(x,y,2,newB);
         }
     }
 }
- 
-
+ int main (){
+    Image image("luffy.jpg");
+    applyPurple_15(image);
+    image.saveImage("op.jpg");
+ }

@@ -1,5 +1,5 @@
 #include "Filters.h"
-#include "Image_Class.h"
+#include "Image_class.h"
 
 using namespace std;
 
@@ -118,7 +118,7 @@ void applyDetectImageEdges_10(Image& image){
        
 }
 
-void applyOldTvscreen_14 (Image& image){
+void applyOldTvScreen_14(Image& image){
     
     for(int i = 0; i < image.width ;++i){
         for(int j = 0; j < image.height ;++j){
