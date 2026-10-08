@@ -50,8 +50,3 @@ void applyPurple_15(Image& image) {
         }
     }
 }
- int main (){
-    Image image("luffy.jpg");
-    applyPurple_15(image);
-    image.saveImage("op.jpg");
- }

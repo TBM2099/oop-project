@@ -111,7 +111,7 @@ void applyMerge_9(Image& image1, Image& image2, bool resize)
     };
 }
  
-void Wano_13(Image& wano)
+void applySunlight_13(Image& wano)
 {
     for (int x = 0; x < wano.width; x++)
     {
