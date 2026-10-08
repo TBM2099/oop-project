@@ -1,6 +1,7 @@
 
 #include "Filter.h"
 #include "Image_class.h"
+#include <algorithm>
 
 
      // Filter 4: Adding a Frame to the Picture
@@ -116,9 +117,6 @@ void applyFrame_4(Image& image, int frameType,
      }
 
 
-    
-
-
 void applyResize_8(Image& image, int newWidth, int newHeight) 
 {
     int TheOriginal_PIC_heihgt = image.height;
@@ -167,8 +165,8 @@ void applyBlur_12(Image& image, float factor) {
         TheRadius = 1 ;
     }
 
-    for(int Y_Height =0 ; Y_Height <image.height ; ++Y_Height){//رأسي up to down
-        for(int X_Width=0 ; X_Width  < image.width ; ++X_Width ){// افقي  Left TO Right 
+    for(int Y_Height12 =0 ; Y_Height12 <image.height ; ++Y_Height12){//رأسي up to down
+        for(int X_Width12=0 ; X_Width12  < image.width ; ++X_Width12 ){// افقي  Left TO Right 
             for (int channal =0 ; channal < 3 ; ++channal){
 
                 int Total_NreabyPixels = 0 , How_ManyPixelsWe_H = 0  ;//الحصاله 
@@ -177,8 +175,8 @@ void applyBlur_12(Image& image, float factor) {
                 for(int Delta_Y = -TheRadius ; Delta_Y <= TheRadius ; ++Delta_Y){//التحكم ب الازاحه الرأسيه 
                     for(int Delta_X =-  TheRadius ; Delta_X <= TheRadius ; ++Delta_X ){//التحكم بالزاحه الافقيه 
 
-                        int neighbours_Y = Y_Height + Delta_Y ; 
-                        int neighbours_X = X_Width + Delta_X ; // the nei..bour = me + Delta 
+                        int neighbours_Y = Y_Height12 + Delta_Y ; 
+                        int neighbours_X = X_Width12 + Delta_X ; // the nei..bour = me + Delta 
 
                         if (neighbours_Y >= 0 && neighbours_Y < image.height && neighbours_X >= 0 && neighbours_X < image.width ){// حدوووووووووووووووود الصوره 
 
@@ -194,19 +192,95 @@ void applyBlur_12(Image& image, float factor) {
 
                 int ave = Total_NreabyPixels / How_ManyPixelsWe_H;
 
-                image.setPixel(X_Width , Y_Height , channal  , ave);
+                image.setPixel(X_Width12 , Y_Height12 , channal  , ave);
 
             }
 
         }
     }
+}
 
+// Filter 16: Infrared Photography 
+void applyInfrared_16(Image& Image){
+    for (int Y_Height16 =0 ; Y_Height16< Image.height ; ++Y_Height16 ){ 
+        for(int X_Windth16  =0 ; X_Windth16 < Image.width ; ++ X_Windth16){
 
+            unsigned char RedColor = Image.getPixel(X_Windth16 , Y_Height16 , 0);
+            unsigned char GreenColor = Image.getPixel(X_Windth16 , Y_Height16 , 1);          //الالوان الاصيله 
+            unsigned char BuleColor = Image.getPixel(X_Windth16 , Y_Height16 , 2);
 
+            unsigned char NewColor_ofRed =255; // the red is full
+            unsigned char ReverseGreen  = 255 - GreenColor ; 
+            unsigned char ReverseBlue = 255 - BuleColor ; 
 
+            Image.setPixel(X_Windth16 , Y_Height16 , 0 , NewColor_ofRed );// apply the new color 
+            Image.setPixel(X_Windth16 , Y_Height16 , 1 , ReverseGreen ); 
+            Image.setPixel(X_Windth16 , Y_Height16 , 2 , ReverseBlue );
+        }
+    }
 }
 
 
 
 
+
+
+// Filter 18: Oil Painting Effect (Simple & Short)
+void applyOilPainting_18(Image& image){
+
+    Image therealpict = image ;
+    int TheRadius_18 = 4 ;
+    int Lightinglevels = 10 ;  
+
+    for (int Y_Height_18 =0 ; Y_Height_18 < image.height ; ++Y_Height_18){
+        for(int X_Width_18 = 0 ; X_Width_18 < image.width ; ++X_Width_18 ){
+
+           int  num_pixsl[10] = {0} ; // حصاله عدد البيكسلات 
+           int sumRedColor [10] = {0} , sumGreenColor[10] = {0} , sumBlueColor[10] = {0};
+
+           for (int Neighbour_Y_18 = - TheRadius_18 ; Neighbour_Y_18 <= TheRadius_18 ; ++Neighbour_Y_18 ){
+            for (int Neighbour_X_18 = - TheRadius_18 ; Neighbour_X_18 <= TheRadius_18 ; ++Neighbour_X_18){
+
+
+                int clamp_Of_X = std::clamp(X_Width_18 + Neighbour_X_18, 0, image.width - 1);
+                int clamp_Of_Y = std::clamp(Y_Height_18 + Neighbour_Y_18, 0 , image.height -1);
+
+                int RedColor_18 = therealpict.getPixel(clamp_Of_X , clamp_Of_Y , 0 ); 
+                int GreenColor_18 = therealpict.getPixel(clamp_Of_X , clamp_Of_Y , 1);
+                int BlueColor_18 = therealpict.getPixel(clamp_Of_X , clamp_Of_Y , 2);
+
+                int Total_18 =( ((RedColor_18 + GreenColor_18 + BlueColor_18 )/3) * Lightinglevels / 256);
+                
+                num_pixsl    [Total_18]++;
+                sumRedColor  [Total_18] += RedColor_18 ; 
+                sumGreenColor[Total_18]  += GreenColor_18;
+                sumBlueColor [Total_18 ]+= BlueColor_18; 
+                
+
+
+            }
+            
+           }
+
+
+           int max_18 = 0 ;
+           for (int i =1 ; i < Lightinglevels ; ++i){
+            if(num_pixsl[i]>num_pixsl[max_18 ]){
+                max_18 = i;
+            }
+           }
+
+
+           image.setPixel(X_Width_18 , Y_Height_18 , 0 , sumRedColor[max_18]    / num_pixsl[max_18]);
+           image.setPixel(X_Width_18 , Y_Height_18 , 1 , sumGreenColor[max_18] / num_pixsl[max_18]);
+           image.setPixel(X_Width_18 , Y_Height_18 , 2 , sumBlueColor[max_18] / num_pixsl[max_18]);
+
+
+
+
+
+        }
+    }
+
+}
 
