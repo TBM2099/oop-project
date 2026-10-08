@@ -164,7 +164,7 @@ void MainWindow::applySelectedFilter() {
             break;
         }
 
-        case 4: {   // Flip: horizontal or vertical
+        case 4: {   // Flip
             QStringList directions = {"Horizontal", "Vertical"};
             QString direction = QInputDialog::getItem(this, "Flip Direction",
                                     "Choose the flip direction:", directions, 0, false, &ok);
@@ -173,7 +173,7 @@ void MainWindow::applySelectedFilter() {
             break;
         }
 
-        case 5: {   // Rotate: 90 / 180 / 270
+        case 5: {   // Rotate
             QStringList degrees = {"90", "180", "270"};
             QString degreeText = QInputDialog::getItem(this, "Rotate Image",
                                     "Choose the rotation angle (degrees):", degrees, 0, false, &ok);
@@ -182,16 +182,16 @@ void MainWindow::applySelectedFilter() {
             break;
         }
 
-        case 6: {   // Brightness: factor < 1 darkens, factor > 1 lightens
-            double factor = QInputDialog::getDouble(this, "Brightness",
-                                "Factor (below 1 = darken, above 1 = lighten):",
-                                1.0, 0.1, 3.0, 2, &ok);
+        case 6: {   // Brightness: percent, negative darkens, positive lightens
+            double percent = QInputDialog::getDouble(this, "Brightness",
+                                "Percent (negative = darken, positive = lighten):",
+                                0.0, -100.0, 200.0, 0, &ok);
             if (!ok) return;
-            applyBrightness_7(m_currentImage, factor);
+            applyBrightness_7(m_currentImage, percent);
             break;
         }
 
-        case 7: {   // Resize: new width and height
+        case 7: {   // Resize
             int _new_width = QInputDialog::getInt(this, "Resize Image",
                                 "New width (pixels):", m_currentImage.width, 1, 10000, 1, &ok);
             if (!ok) return;
@@ -217,9 +217,11 @@ void MainWindow::applySelectedFilter() {
             QString mergeChoice = QInputDialog::getItem(this, "Merge Type",
                                     "Choose the merge type:", mergeTypes, 0, false, &ok);
             if (!ok) return;
-            int mergeType = mergeTypes.indexOf(mergeChoice) + 1;
 
-            applyMerge_9(m_currentImage, secondImage, mergeType);
+            // The function takes a bool: true = resize (type 1), false = common area (type 2)
+            bool resize = (mergeTypes.indexOf(mergeChoice) == 0);
+
+            applyMerge_9(m_currentImage, secondImage, resize);
             break;
         }
 
@@ -227,7 +229,7 @@ void MainWindow::applySelectedFilter() {
             applyDetectImageEdges_10(m_currentImage);
             break;
 
-        case 10: {  // Crop: top-left corner (x, y) + width + height
+        case 10: {  // Crop
             int _crop_x = QInputDialog::getInt(this, "Crop Image",
                                 "Start X (top-left corner):", 0, 0, m_currentImage.width - 1, 1, &ok);
             if (!ok) return;
@@ -246,9 +248,10 @@ void MainWindow::applySelectedFilter() {
             break;
         }
 
-        case 11: {  // Blur: level
+        case 11: {  // Blur: radius = factor / 5 (minimum 1)
             double blurFactor = QInputDialog::getDouble(this, "Blur Image",
-                                    "Blur level (higher = blurrier):", 2.0, 0.5, 20.0, 1, &ok);
+                                    "Blur level (5 = light, 50 = very strong):",
+                                    10.0, 5.0, 50.0, 0, &ok);
             if (!ok) return;
             applyBlur_12(m_currentImage, static_cast<float>(blurFactor));
             break;
@@ -270,7 +273,7 @@ void MainWindow::applySelectedFilter() {
             applyInfrared_16(m_currentImage);
             break;
 
-        case 16: {  // Skew: angle in degrees (signature is applySkewing_17(Image&, int))
+        case 16: {  // Skew
             int angle = QInputDialog::getInt(this, "Skew Image",
                                 "Skew angle (degrees):", 40, -80, 80, 1, &ok);
             if (!ok) return;
@@ -278,10 +281,9 @@ void MainWindow::applySelectedFilter() {
             break;
         }
 
-        case 17: {  // Oil painting
+        case 17:
             applyOilPainting_18(m_currentImage);
             break;
-        }
 
         default:
             break;
