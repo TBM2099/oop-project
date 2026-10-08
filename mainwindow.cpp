@@ -280,10 +280,10 @@ void MainWindow::applySelectedFilter() {
             return;
 
         case 16: {  // Skew: angle in degrees
-            double angle = QInputDialog::getDouble(this, "Skew Image",
+            int angle = QInputDialog::getDouble(this, "Skew Image",
                                 "Skew angle (degrees):", 40.0, -80.0, 80.0, 1, &ok);
             if (!ok) return;
-            // applySkew_17(m_currentImage, angle);
+            applySkewing_17(m_currentImage, angle);
             break;
         }
 

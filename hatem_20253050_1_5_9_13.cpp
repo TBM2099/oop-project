@@ -129,7 +129,7 @@ void Wano_13(Image& wano)
 }
 
 
-void applySkew_17(Image& image, double angle) {
+void applySkewing_17(Image& image, int angle) {
     int w = image.width;
     int h = image.height;
 
