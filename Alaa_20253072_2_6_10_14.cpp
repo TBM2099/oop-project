@@ -37,7 +37,7 @@ void applyRotate_6(Image& image, int degree){
                 for (int k = 0; k < 3; ++k) {
 
                 anotherImageWithReversedSize(i, j, k)
-                    = image(j, anotherImageWithReversedSize.width- 1 - i, k);
+                    = image(j, image.height- 1 - i, k);
                  }
              }
          } 
