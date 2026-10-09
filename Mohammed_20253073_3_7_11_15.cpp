@@ -33,8 +33,22 @@ void applyBrightness_7(Image& image, double factor) {
 
 
 
-void applyCrop_11 (Image& image, int x, int y, int width, int height){
-    // write your code here
+void applyCrop_11(Image& image, int x, int y, int width, int height) {
+    // all inputs should be positive
+    if (x < 0 || y < 0 || width <= 0 || height <= 0) return ;
+    if (width > image.width - x || height > image.height - y) return;
+ 
+    // Image object that will hold the cropped part
+    Image cropped_Image (width, height ); 
+
+    for (int newX = 0 ; newX < width; newX++) {
+        for (int newY = 0; newY < height; newY++) {
+            for (int c = 0; c < 3; c++) {
+                cropped_Image(newX, newY , c) = image( x + newX, y + newY, c);
+            }
+        } 
+    }
+    image = cropped_Image;
 }
 
 void applyPurple_15(Image& image) {
