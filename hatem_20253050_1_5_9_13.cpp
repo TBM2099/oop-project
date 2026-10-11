@@ -18,12 +18,15 @@ void applyGrayscale_1(Image& imagez)
             unsigned char green = imagez(x, y, 1);//Here I wanted to assign the color channel values ​​to variables so that I could take their average.
             unsigned char blue = imagez(x, y, 2);
 
-            unsigned char avg = (int(red) + green + blue) / 3 ;//this "int(red)" To avoid overflow
+            short avg = (red + green + blue) / 3 ;//this "int(red)" To avoid overflow
 
-            imagez(x, y, 0) = avg;
-            imagez(x, y, 1) = avg;//Here, I applied the same ratio to all channels.
-            imagez(x, y, 2) = avg;
-
+           
+            for (int c = 0; c < imagez.channels; c++)
+            {
+                     imagez(x, y, c) = avg;
+            }
+           
+           
         }
     }
 
@@ -31,36 +34,38 @@ void applyGrayscale_1(Image& imagez)
 
 void applyFlip_5(Image& image, bool horizontal )
 {
-    Image temp = image;//Original backup image for copying
+    Image temp = image;//So that I don't lose the pixel locations of the image during copying and editing.
 
-    for (int x = 0; x < image.width; x++)//To go through all pixels
+    if (horizontal)
     {
-        for (int y = 0; y < image.height; y++)
+        for (int x = 0; x < image.width; x++)
         {
-            if (horizontal)//To perform horizontal inversion
+            for (int y = 0; y < image.height; y++)
             {
-                //This is the variable in which we will store the new coordinate.
-                int newX = image.width - 1 - x;//The equation that makes each pixel match its counterpart on the opposite side
+                int newX = image.width - (x + 1);//Equation for determining the new coordinate
 
-                //Here we began copying from the original version we created above to the mirrored version.
+                for (int c = 0; c < image.channels; c++)
+                {
+                   image(x, y, c) = temp(newX, y, c);
                 
-                for (int c = 0; c < image.channels; c++)
-                    {
-                        image(x, y, c) = temp(newX, y, c);
-                    }
-
-
-                            
+                }
             }
+        }
+    }
 
-            else
+    else 
+    {
+         for (int x = 0; x < image.width; x++)
+        {
+            for (int y = 0; y < image.height; y++)
             {
-                int newY = image.height -1 - y;
+                int newY = image.height - (y + 1);//Equation for determining the new coordinate
 
                 for (int c = 0; c < image.channels; c++)
-                    {
-                        image(x, y, c) = temp(x, newY, c);
-                    }
+                {
+                   image(x, y, c) = temp(x,newY, c);
+                
+                }
             }
         }
     }
@@ -83,11 +88,32 @@ void applyMerge_9(Image& image1, Image& image2, bool resize)
         }
                
     }
+    
     // take commom area 
-    int targetWidth = (resize) ? image1.width : std::min(image1.width ,image2.width);
-    int targeHeight = (resize) ? image1.height : std::min(image1.height ,image2.height);
+   
+    int targetWidth;
+    int targeHeight;
+   
+    if (resize)
+    {
+         targetWidth = image1.width;
+    }
+    else
+    {
+         targetWidth = std::min(image1.width,image2.width);
+    }
 
+    if (resize)
+    {
+         targeHeight = image1.height;
+    }
+    else
+    {
+         targeHeight = std::min(image1.height,image2.height);
+    }
         
+    
+    
     for (int x = 0; x < targetWidth; x++)
     {
         for (int y = 0; y < targeHeight; y++)
