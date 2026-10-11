@@ -128,7 +128,6 @@ void applySunlight_13(Image& wano)
     }
 }
 
-
 void applySkewing_17(Image& image, int angle) {
     int w = image.width;
     int h = image.height;
