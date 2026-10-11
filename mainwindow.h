@@ -10,7 +10,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include "Image_Class.h"
-#include "filters.h"
+#include "Filters.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT

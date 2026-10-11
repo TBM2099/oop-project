@@ -64,9 +64,9 @@ void applyPurple_15(Image& image) ;
 // Filter 16: Infrared Photography 
 void applyInfrared_16(Image& image);
 
-// Filter 17: Skewing image
-void applySkewing_17 (Image& image, int degree );
+// Filter 17: Skewing Image
+void applySkewing_17(Image& image , int angle);
 
-// Filter 18: Oil Painting 
-void applyOilPainting (Image& image) ;
+// Filter 18: Oil Painting
+void applyOilPainting_18(Image& image) ;
 #endif // FILTERS_H

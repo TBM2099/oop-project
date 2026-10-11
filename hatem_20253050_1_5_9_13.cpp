@@ -111,7 +111,7 @@ void applyMerge_9(Image& image1, Image& image2, bool resize)
     };
 }
  
-void Wano_13(Image& wano)
+void applySunlight_13(Image& wano)
 {
     for (int x = 0; x < wano.width; x++)
     {
@@ -129,7 +129,7 @@ void Wano_13(Image& wano)
 }
 
 
-void applySkew_17(Image& image, double angle) {
+void applySkewing_17(Image& image, int angle) {
     int w = image.width;
     int h = image.height;
 

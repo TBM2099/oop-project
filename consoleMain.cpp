@@ -525,10 +525,10 @@ int main() {
                 std::cout << "\nChoose an option:\n1.horizontal\n2.vertical\n->";
                 int subChoice;
                 // Validation: ensure input is a valid number and strictly 1 or 2
-                while (!(std::cin >> subChoice)  || (subChoice != 1 && subChoice != 2)) {
+                while (!(std::cin >> subChoice) || (subChoice != 1 && subChoice != 2)) {
                     std::cout << "Invalid input. Enter 1 or 2: ";
                     std::cin.clear();
-                    std::cin.ignore(10000, '\n'); 
+                    std::cin.ignore(10000, '\n');
                 }
                 
                 if (subChoice == 2) {
@@ -542,25 +542,20 @@ int main() {
             }
             
             case Option::Filter6: {
-                std::cout << "Enter a degree of rotation (you allowd to choice one of these options :90 ,180 or 270): \n->";
+                std::cout << "Enter a degree of rotation (e.g. 180, 90):\n->";
                 int degree;
-                std::cin >> degree;
-                // Validation: ensure input is a valid value
-                
-                while (degree != 90 && degree != 180 && degree != 270) {
-                        std::cout << "Invalid input. Enter a valid number for degree (90, 180, or 270): ";
-                       
-                        std::cin.clear();
-                        std::cin.ignore(10000, '\n');
-                        std::cin >> degree;
+                // Validation: ensure input is a valid integer
+                while (!(std::cin >> degree)) {
+                    std::cout << "Invalid input. Enter a valid number for degree: ";
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
                 }
 
-                applyRotate_6(currentImage, degree );
+                applyRotate_6(currentImage, degree % 360);
                 isSaved = false;
                 std::cout << "\nFilter applied successfully!\n";
                 break;
             }
-        
             
             case Option::Filter7: {
                 int mode;
@@ -663,3 +658,5 @@ int main() {
 
     return 0;
 }
+
+

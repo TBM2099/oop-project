@@ -21,12 +21,13 @@ qt_add_executable(QtTest
     main.cpp
     mainwindow.cpp
     mainwindow.h
-    Image_Class.h
-    Filters.h
-    Alaa_20253072_2_6_10_14.cpp
+    
     hatem_20253050_1_5_9_13.cpp
-    Mohammed_20253073_3_7_11_15.cpp
     Mohammed_20253081_4_8_12_16.cpp
+    Alaa_20253072_2_6_10_14.cpp
+    Mohammed_20253073_3_7_11_15.cpp
+    Filters.h
+    Image_Class.h
     stb_impl.cpp
 )
 
