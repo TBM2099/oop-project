@@ -161,6 +161,3 @@ void applySkew_17(Image& image, double angle) {
 
     image = result;
 }
-
-
-
