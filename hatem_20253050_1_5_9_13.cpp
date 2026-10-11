@@ -117,11 +117,11 @@ void applySunlight_13(Image& wano)
     {
         for (int y = 0; y < wano.height; y++)
         {
-            int red = wano(x, y, 0) * 1.15;
-            int green = wano(x, y, 1) * 1.15;
-            int blue = wano(x, y, 2) * 0.7;
+            int red = wano(x, y, 0) * 1.15;// increas 15%
+            int green = wano(x, y, 1) * 1.15;//increas 15%
+            int blue = wano(x, y, 2) * 0.7;//decrease 30%
 
-            wano(x, y, 0) = std::min(red, 255);
+            wano(x, y, 0) = std::min(red, 255);//Because if the increase brings the channel to more than 255, we take the maximum limit, which is 255.
             wano(x, y, 1) = std::min(green, 255);
             wano(x, y, 2) = blue;
         }
